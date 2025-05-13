@@ -1,0 +1,164 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Razer DeathAdder V3 Pro",
+      "price": 49.99,
+      "image": "https://assets2.razerzone.com/images/pnx.assets/9fd641835510958a2951b1e004bedec3/500x500-razer-deathadder-v3-pro.webp",
+      "specs": {
+        "dpi": "30,000 DPI",
+        "weight": "63g",
+        "connectivity": "Wireless",
+        "battery": "Up to 90 hours",
+        "switches": "Optical Gen-3",
+        "features": "Ultra-lightweight design, HyperSpeed wireless technology, 8000Hz polling rate"
+      },
+      "category": "gaming",
+      "description": "Professional-grade gaming mouse with ultra-precise tracking"
+    },
+    {
+      "id": 2,
+      "name": "Razer Viper Mini Signature Edition",
+      "price": 59.99,
+      "image": "https://assets2.razerzone.com/images/pnx.assets/9fd641835510958a2951b1e004bedec3/razer-viper-mini-special-edition-500x500.webp",
+      "specs": {
+        "dpi": "30,000 DPI",
+        "weight": "49g",
+        "connectivity": "Wireless",
+        "battery": "Up to 60 hours",
+        "switches": "Optical Gen-3",
+        "features": "Magnesium alloy exoskeleton, HyperSpeed wireless, 8000Hz polling rate"
+      },
+      "category": "premium",
+      "description": "Ultra-lightweight professional gaming mouse"
+    },
+    {
+      "id": 3,
+      "name": "Razer Viper V3 Pro Faker Edition",
+      "price": 39.99,
+      "image": "https://assets2.razerzone.com/images/pnx.assets/4472dcdbd324eacbdaf5ae9433a0c83a/54g-ultra-lightweight-design.webp",
+      "specs": {
+        "dpi": "30,000 DPI",
+        "weight": "54g",
+        "connectivity": "Wireless",
+        "battery": "Up to 70 hours",
+        "switches": "Optical Gen-3",
+        "features": "Faker Edition, Focus Pro 30K Optical Sensor, HyperSpeed wireless"
+      },
+      "category": "gaming",
+      "description": "Signature edition gaming mouse endorsed by Faker"
+    },
+    {
+      "id": 4,
+      "name": "RAZER COBRA PRO",
+      "price": 69.99,
+      "image": "https://assets2.razerzone.com/images/pnx.assets/780a74ce808f4b7c0a5c3a389cb98eed/razer-cobra-line-cobrapro_500x500.jpg",
+      "specs": {
+        "dpi": "30,000 DPI",
+        "weight": "77g",
+        "connectivity": "Wireless",
+        "battery": "Up to 100 hours",
+        "switches": "Optical Gen-3",
+        "features": "RGB lighting, HyperSpeed wireless, 10 programmable buttons"
+      },
+      "category": "gaming",
+      "description": "Advanced gaming mouse with customizable RGB"
+    },
+    {
+      "id": 5,
+      "name": "RAZER COBRA",
+      "price": 79.99,
+      "image": "https://assets2.razerzone.com/images/pnx.assets/780a74ce808f4b7c0a5c3a389cb98eed/razer-cobra-line-cobra_500x500.jpg",
+      "specs": {
+        "dpi": "30,000 DPI",
+        "weight": "58g",
+        "connectivity": "Wired",
+        "battery": "N/A",
+        "switches": "Optical Gen-3",
+        "features": "RGB lighting, Speedflex Cable, 8 programmable buttons"
+      },
+      "category": "gaming",
+      "description": "High-performance wired gaming mouse"
+    },
+    {
+      "id": 6,
+      "name": "Razer Viper Mini Signature Edition(White)",
+      "price": 299.99,
+      "image": "https://assets2.razerzone.com/images/pnx.assets/79efc99fc1f97219fec9ec15a35e21fd/razer-viper-mini-se-white-hero-desktop.webp",
+      "specs": {
+        "dpi": "30,000 DPI",
+        "weight": "49g",
+        "connectivity": "Wireless",
+        "battery": "Up to 60 hours",
+        "switches": "Optical Gen-3",
+        "features": "Limited White Edition, Magnesium alloy exoskeleton, HyperSpeed wireless"
+      },
+      "category": "premium",
+      "description": "Limited edition white ultra-lightweight mouse"
+    },
+    {
+      "id": 7,
+      "name": "Razer Viper Mini Signature Edition(Black)",
+      "price": 299.99,
+      "image": "https://assets2.razerzone.com/images/pnx.assets/9a858042c19e2d15bcab1dec9578212f/razer-viper-mini-se-black-hero-desktop.webp",
+      "specs": {
+        "dpi": "30,000 DPI",
+        "weight": "49g",
+        "connectivity": "Wireless",
+        "battery": "Up to 60 hours",
+        "switches": "Optical Gen-3",
+        "features": "Limited Black Edition, Magnesium alloy exoskeleton, HyperSpeed wireless"
+      },
+      "category": "premium",
+      "description": "Limited edition black ultra-lightweight mouse"
+    },
+    {
+      "id": 8,
+      "name": "Razer DeathAdder V3 HyperSpeed",
+      "price": 29.99,
+      "image": "https://assets2.razerzone.com/images/pnx.assets/899904dcff163e7eee5feb5d376035a7/razer-deathadder-v3-hyperspeed-365x365.webp",
+      "specs": {
+        "dpi": "26,000 DPI",
+        "weight": "83g",
+        "connectivity": "Wireless",
+        "battery": "Up to 235 hours",
+        "switches": "Mechanical",
+        "features": "HyperSpeed wireless, Ergonomic design, 5 programmable buttons"
+      },
+      "category": "ergonomic",
+      "description": "Ergonomic wireless gaming mouse with extended battery life"
+    },
+    {
+      "id": 9,
+      "name": "Razer Viper V3 Pro",
+      "price": 49.99,
+      "image": "https://assets2.razerzone.com/images/pnx.assets/51c1cd7280e00ab964fe652dd39688cd/viper-v3-pro-500x500.webp",
+      "specs": {
+        "dpi": "30,000 DPI",
+        "weight": "54g",
+        "connectivity": "Wireless",
+        "battery": "Up to 70 hours",
+        "switches": "Optical Gen-3",
+        "features": "Focus Pro 30K Optical Sensor, HyperSpeed wireless, Ambidextrous design"
+      },
+      "category": "productivity",
+      "description": "Professional-grade ambidextrous mouse"
+    },
+    {
+      "id": 10,
+      "name": "RAZER BASILISK V3 PRO 35K",
+      "price": 59.99,
+      "image": "https://assets2.razerzone.com/images/pnx.assets/392d2ff1497385d9db4575e709d058ac/500x500-basilisklinepg-productline-basiliskv3pro.webp",
+      "specs": {
+        "dpi": "35,000 DPI",
+        "weight": "112g",
+        "connectivity": "Wireless",
+        "battery": "Up to 150 hours",
+        "switches": "Optical Gen-3",
+        "features": "13 programmable buttons, HyperScroll tilt wheel, RGB lighting"
+      },
+      "category": "productivity",
+      "description": "Feature-rich productivity mouse with extensive customization"
+    }
+  ]
+}
