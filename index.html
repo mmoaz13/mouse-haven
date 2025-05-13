@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Haven | Premium Gaming Mice</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          vibrant: {
+            50: '#f0fdfa',
+            100: '#ccfbf1',
+            200: '#99f6e4',
+            300: '#5eead4',
+            400: '#2dd4bf',
+            500: '#14b8a6',
+            600: '#0d9488',
+            700: '#0f766e',
+            800: '#115e59',
+            900: '#134e4a',
+          },
+          neon: {
+            50: '#fbf8ff',
+            100: '#f5eeff',
+            200: '#e9d5ff',
+            300: '#d8b4fe',
+            400: '#c084fc',
+            500: '#a855f7',
+            600: '#9333ea',
+            700: '#7e22ce',
+            800: '#6b21a8',
+            900: '#581c87',
+          },
+          hot: {
+            50: '#fff1f2',
+            100: '#ffe4e6',
+            200: '#fecdd3',
+            300: '#fda4af',
+            400: '#fb7185',
+            500: '#f43f5e',
+            600: '#e11d48',
+            700: '#be123c',
+            800: '#9f1239',
+            900: '#881337',
+          }
+        },
+        animation: {
+          'float': 'float 3s ease-in-out infinite',
+          'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+        },
+        keyframes: {
+          float: {
+            '0%, 100%': { transform: 'translateY(0)' },
+            '50%': { transform: 'translateY(-10px)' },
+          },
+          'pulse-glow': {
+            '0%, 100%': { 
+              boxShadow: '0 0 5px rgba(46, 213, 197, 0.5), 0 0 10px rgba(46, 213, 197, 0.3)' 
+            },
+            '50%': { 
+              boxShadow: '0 0 15px rgba(46, 213, 197, 0.8), 0 0 20px rgba(46, 213, 197, 0.5)' 
+            },
+          }
+        }
+      },
+    },
+    plugins: [window.daisyui],
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/daisyui@2.51.2/dist/full.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.2/dist/full.css" rel="stylesheet" />
+<style>
+  body {
+    background-color: #0a0a0f;
+    color: #e6e6e6;
+  }
+  
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background-color: #16213e;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  
+  @media (max-width: 640px) {
+    .cart-drawer {
+      width: 100%;
+      right: -100%;
+    }
+  }
+  
+  .cart-drawer.open {
+    right: 0;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    z-index: 999;
+  }
+  
+  .overlay.open {
+    display: block;
+  }
+  
+  .cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #f43f5e;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+  
+  .cart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    color: #a0a0a0;
+  }
+  
+  .cart-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 10px;
+    padding: 15px;
+    border-bottom: 1px solid #2a2a4a;
+  }
+  
+  .quantity-control {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+  }
+  
+  .quantity-control button {
+    width: 24px;
+    height: 24px;
+    background-color: #2a2a4a;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .quantity-control span {
+    margin: 0 8px;
+  }
+
+  
+  .checkout-summary {
+    background-color: #1e1e3a;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .summary-total {
+    font-weight: bold;
+    border-top: 1px solid #2a2a4a;
+    padding-top: 8px;
+    margin-top: 8px;
+  }
+
+  .promo-code-container {
+    display: flex;
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
+
+  .promo-code-input {
+    flex-grow: 1;
+    border: 1px solid #2a2a4a;
+    border-radius: 4px 0 0 4px;
+    padding: 8px 12px;
+    background-color: #1e1e3a;
+    color: #e6e6e6;
+  }
+
+  .promo-code-button {
+    background-color: #14b8a6;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+  .checkout-steps {
+    display: flex;
+    margin-bottom: 16px;
+  }
+
+  .checkout-step {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    background-color: #1e1e3a;
+    color: #a0a0a0;
+  }
+
+  .checkout-step.active {
+    background-color: #14b8a6;
+    color: white;
+  }
+
+  .shipping-options {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .shipping-option {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #2a2a4a;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    background-color: #1e1e3a;
+  }
+
+  .shipping-option.selected {
+    border-color: #14b8a6;
+    background-color: #1a3a38;
+  }
+
+  .shipping-option-radio {
+    margin-right: 12px;
+  }
+
+  .shipping-option-details {
+    flex-grow: 1;
+  }
+
+  .shipping-option-price {
+    font-weight: bold;
+  }
+
+  .checkout-view {
+    display: none;
+  }
+
+  .checkout-view.active {
+    display: block;
+  }
+
+  .checkout-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+
+  
+  .purchase-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .purchase-modal.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .purchase-modal-content {
+    background-color: #16213e;
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .purchase-modal.open .purchase-modal-content {
+    transform: translateY(0);
+  }
+
+  .purchase-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #14b8a6;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+  }
+
+  
+  .transition-all {
+    transition: all 0.3s ease;
+  }
+
+  
+  .spec-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #12121a;
+    border-radius: 8px;
+  }
+
+  .spec-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .spec-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.25rem;
+  }
+
+  .spec-value {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .carousel-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    padding: 2rem 1.5rem 1.5rem;
+    color: white;
+  }
+
+  
+  #toast {
+    background-color: #14b8a6;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  }
+
+  
+  .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .category-filter {
+    background-color: rgba(30, 30, 58, 0.5);
+    color: #a0a0a0;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .category-filter:hover {
+    background-color: rgba(20, 184, 166, 0.1);
+    color: #e6e6e6;
+    border-color: rgba(20, 184, 166, 0.3);
+  }
+
+  .category-filter.active {
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+  }
+
+  .category-filter::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s;
+  }
+
+  .category-filter:hover::before {
+    transform: translate(-50%, -50%) scale(2);
+  }
+
+  .category-filter i {
+    transition: transform 0.3s ease;
+  }
+
+  .category-filter:hover i {
+    transform: scale(1.2);
+  }
+
+  @media (max-width: 640px) {
+    .category-filter {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  
+  .category-badge {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+  }
+
+  .category-badge.gaming {
+    background-color: #f43f5e;
+    color: white;
+  }
+
+  .category-badge.productivity {
+    background-color: #3b82f6;
+    color: white;
+  }
+
+  .category-badge.ergonomic {
+    background-color: #10b981;
+    color: white;
+  }
+
+  .category-badge.premium {
+    background-color: #f59e0b;
+    color: white;
+  }
+
+  
+  .gradient-text {
+    background: linear-gradient(to right, #14b8a6, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  
+  .animated-bg {
+    background: linear-gradient(-45deg, #0f172a, #1e293b, #0f766e, #0d9488);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  
+  .product-card {
+    background-color: #1a1a2e;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+  }
+
+  .product-card .card-body {
+    padding: 1.5rem;
+  }
+
+  .product-card .card-title {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card .price {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+  }
+
+  .product-card .description {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  .product-card .features {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+    padding: 1rem;
+    background-color: #12121a;
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+
+  .product-card img {
+    transition: all 0.3s ease;
+  }
+
+  .product-card:hover img {
+    transform: scale(1.05);
+  }
+
+  
+  .gradient-border::before {
+    display: none;
+  }
+
+  .glow-effect {
+    animation: none;
+    box-shadow: none;
+  }
+
+ 
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  
+  .glass-effect {
+    background: rgba(22, 33, 62, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(46, 213, 197, 0.18);
+  }
+
+  
+  .neon-glow {
+    box-shadow: 0 0 5px #14b8a6, 0 0 10px #14b8a6, 0 0 15px #14b8a6;
+  }
+
+  
+  .gradient-border {
+    position: relative;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #14b8a6, #a855f7, #3b82f6);
+    z-index: -1;
+    border-radius: 0.6rem;
+  }
+
+  
+  .vibrant-card {
+    background-color: #16213e;
+    border: 1px solid #2a2a4a;
+  }
+
+  
+  .glow-effect {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1a1a2e;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a4a;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #14b8a6;
+  }
+  
+  
+  .btn-vibrant {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-vibrant:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  .btn-vibrant:active {
+    transform: translateY(0);
+  }
+  
+  .btn-vibrant::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+  }
+  
+  .btn-vibrant:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0, 0);
+      opacity: 0.5;
+    }
+    20% {
+      transform: scale(25, 25);
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(40, 40);
+    }
+  }
+  
+  .btn-neon {
+    background-color: #a855f7;
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-neon:hover {
+    background-color: #9333ea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+  }
+  
+  .btn-outline-glow {
+    background-color: transparent;
+    color: white;
+    border: 2px solid #14b8a6;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-outline-glow:hover {
+    background-color: rgba(20, 184, 166, 0.1);
+    box-shadow: 0 0 10px rgba(20, 184, 166, 0.5);
+    border-color: #2dd4bf;
+  }
+  
+  
+  .carousel-nav {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .carousel-nav:hover {
+    background-color: #14b8a6;
+    border-color: #14b8a6;
+    transform: scale(1.1);
+  }
+
+  
+  .form-control.error input {
+    border-color: #f43f5e;
+  }
+
+  .form-control .error-message {
+    color: #f43f5e;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  
+  .email-input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    background-color: #1e1e3a;
+    border: 1px solid #2a2a4a;
+    color: #e6e6e6;
+    margin-bottom: 1rem;
+  }
+
+  .email-input:focus {
+    outline: none;
+    border-color: #14b8a6;
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2);
+  }
+
+  
+  #products {
+    background-color: #0a0a0f;
+  }
+
+  #features {
+    background-color: #12121a;
+  }
+
+  #testimonials {
+    background-color: #0a0a0f;
+  }
+
+  #faq {
+    background-color: #12121a;
+  }
+
+  
+  .spec-list {
+    background-color: #12121a;
+  }
+
+  
+  .product-card .features {
+    background-color: #12121a;
+  }
+
+  
+  .navbar {
+    background: linear-gradient(to right, #12121a, #1a1a2e);
+  }
+</style>
+</head>
+<body class="min-h-screen">
+  
+  
+  <div class="navbar bg-gradient-to-r from-[#0f172a] to-[#1e293b] text-white sticky top-0 z-50">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <label tabindex="0" class="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        </label>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-[#16213e] rounded-box w-52">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <a href="#home" class="btn btn-ghost normal-case text-xl">
+        <i class="fas fa-mouse text-vibrant-400 mr-2"></i>
+        <span class="font-bold">Mouse<span class="text-vibrant-400">Haven</span></span>
+      </a>
+    </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <li><a href="#home" class="font-medium hover:text-vibrant-400 transition-colors">Home</a></li>
+        <li><a href="#products" class="font-medium hover:text-vibrant-400 transition-colors">Products</a></li>
+        <li><a href="#features" class="font-medium hover:text-vibrant-400 transition-colors">Features</a></li>
+        <li><a href="#testimonials" class="font-medium hover:text-vibrant-400 transition-colors">Testimonials</a></li>
+        <li><a href="#faq" class="font-medium hover:text-vibrant-400 transition-colors">FAQ</a></li>
+        <li><a href="#contact" class="font-medium hover:text-vibrant-400 transition-colors">Contact</a></li>
+      </ul>
+    </div>
+    <div class="navbar-end">
+      <div class="relative mr-2">
+        <button id="cart-button" class="btn btn-circle btn-ghost hover:bg-vibrant-900 transition-colors">
+          <i class="fas fa-shopping-cart text-xl"></i>
+          <span id="cart-badge" class="cart-badge hidden">0</span>
+        </button>
+      </div>
+      <a href="#products" class="btn btn-vibrant">Shop Now</a>
+    </div>
+  </div>
+
+  
+  <div id="overlay" class="overlay"></div>
+  <div id="cart-drawer" class="cart-drawer">
+    <div class="p-4 bg-gradient-to-r from-[#0f766e] to-[#0d9488] text-white flex justify-between items-center">
+      <h2 class="text-xl font-bold">Your Cart</h2>
+      <button id="close-cart" class="text-white p-2 hover:bg-vibrant-500 rounded-full transition-all">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+    </div>
+
+    
+    <div id="cart-view" class="checkout-view active">
+      <div id="cart-items" class="p-4">        
+      </div>
+      
+      
+      <div class="px-4">
+        <div class="promo-code-container">
+          <input type="text" id="promo-code-input" class="promo-code-input" placeholder="Enter promo code">
+          <button id="apply-promo" class="promo-code-button bg-vibrant-500 hover:bg-vibrant-600">Apply</button>
+        </div>
+        <div id="promo-message" class="text-sm text-green-400 hidden">Promo code applied successfully!</div>
+      </div>
+
+      
+      <div class="p-4 border-t border-[#2a2a4a]">
+        <div class="checkout-summary">
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <span id="cart-subtotal">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping:</span>
+            <span id="cart-shipping">$0.00</span>
+          </div>
+          <div class="summary-row" id="discount-row" style="display: none;">
+            <span>Discount:</span>
+            <span id="cart-discount">-$0.00</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Total:</span>
+            <span id="cart-total">$0.00</span>
+          </div>
+        </div>
+        <button id="proceed-to-checkout" class="w-full mt-4 btn btn-vibrant py-3 rounded-lg">
+          <i class="fas fa-credit-card mr-2"></i> Proceed to Checkout
+        </button>
+        <button id="clear-cart" class="w-full mt-2 btn btn-outline-glow py-2 rounded-lg">
+          <i class="fas fa-trash-alt mr-2"></i> Clear Cart
+        </button>
+      </div>
+    </div>
+
+    
+    <div id="shipping-view" class="checkout-view p-4">
+      <div class="checkout-steps">
+        <div class="checkout-step active">Cart</div>
+        <div class="checkout-step active">Shipping</div>
+        <div class="checkout-step">Review</div>
+      </div>
+      
+      <h3 class="font-bold text-lg mb-4">Select Shipping Method</h3>
+      
+      <div class="shipping-options">
+        <div class="shipping-option selected" data-shipping="5.99">
+          <input type="radio" name="shipping" class="shipping-option-radio" checked>
+          <div class="shipping-option-details">
+            <div class="font-semibold">Standard Shipping</div>
+            <div class="text-sm text-gray-400">3-5 business days</div>
+          </div>
+          <div class="shipping-option-price">$5.99</div>
+        </div>
+        
+        <div class="shipping-option" data-shipping="12.99">
+          <input type="radio" name="shipping" class="shipping-option-radio">
+          <div class="shipping-option-details">
+            <div class="font-semibold">Express Shipping</div>
+            <div class="text-sm text-gray-400">1-2 business days</div>
+          </div>
+          <div class="shipping-option-price">$12.99</div>
+        </div>
+        
+        <div class="shipping-option" data-shipping="19.99">
+          <input type="radio" name="shipping" class="shipping-option-radio">
+          <div class="shipping-option-details">
+            <div class="font-semibold">Next Day Delivery</div>
+            <div class="text-sm text-gray-400">Delivered tomorrow</div>
+          </div>
+          <div class="shipping-option-price">$19.99</div>
+        </div>
+      </div>
+      
+      <div class="checkout-navigation">
+        <button id="back-to-cart" class="btn btn-outline-glow px-4 py-2 rounded-lg">
+          <i class="fas fa-arrow-left mr-2"></i> Back to Cart
+        </button>
+        <button id="continue-to-review" class="btn btn-vibrant px-4 py-2 rounded-lg">
+          Continue <i class="fas fa-arrow-right ml-2"></i>
+        </button>
+      </div>
+    </div>
+
+    
+    <div id="review-view" class="checkout-view p-4">
+      <div class="checkout-steps">
+        <div class="checkout-step active">Cart</div>
+        <div class="checkout-step active">Shipping</div>
+        <div class="checkout-step active">Review</div>
+      </div>
+      
+      <h3 class="font-bold text-lg mb-4">Order Summary</h3>
+      
+      <div id="review-items" class="mb-4">
+        
+      </div>
+      
+      <div class="checkout-summary">
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span id="review-subtotal">$0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping:</span>
+          <span id="review-shipping">$0.00</span>
+        </div>
+        <div class="summary-row" id="review-discount-row" style="display: none;">
+          <span>Discount:</span>
+          <span id="review-discount">-$0.00</span>
+        </div>
+        <div class="summary-row summary-total">
+          <span>Total:</span>
+          <span id="review-total">$0.00</span>
+        </div>
+      </div>
+      
+      
+      <div class="mt-6">
+        <h4 class="font-semibold mb-2">Contact Information</h4>
+        <div class="form-control">
+          <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+          <input 
+            type="email" 
+            id="checkout-email" 
+            class="email-input" 
+            placeholder="Enter your email for order confirmation"
+            required
+          >
+          <div class="error-message hidden" id="email-error">Please enter a valid email address</div>
+        </div>
+      </div>
+      
+      <div class="checkout-navigation">
+        <button id="back-to-shipping" class="btn btn-outline-glow px-4 py-2 rounded-lg">
+          <i class="fas fa-arrow-left mr-2"></i> Back
+        </button>
+        <button id="checkout-button" class="btn btn-vibrant px-4 py-2 rounded-lg">
+          <i class="fas fa-check-circle mr-2"></i> Complete Purchase
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
+  <div id="home" class="carousel w-full h-screen">
+    <div id="slide1" class="carousel-item relative w-full">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0f172a] to-[#1e293b] opacity-80"></div>
+      <img src="https://assets2.razerzone.com/images/pnx.assets/bb65360b583da8a133ca9efc063bf83f/razer-mice_categoryhero_1920x700.webp" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center max-w-4xl px-4">
+          <h1 class="text-5xl font-bold mb-4 text-white">Ultimate Gaming <span class="gradient-text">Precision</span></h1>
+          <p class="text-xl mb-8 text-gray-200">Discover our collection of high-performance gaming mice designed for precision, comfort, and competitive edge.</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="#products" class="btn btn-vibrant">
+              <i class="fas fa-shopping-bag mr-2"></i> Shop Now
+            </a>
+            <a href="#features" class="btn btn-outline-glow">
+              <i class="fas fa-info-circle mr-2"></i> Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href="#slide3" class="carousel-nav">❮</a> 
+        <a href="#slide2" class="carousel-nav">❯</a>
+      </div>
+    </div> 
+    <div id="slide2" class="carousel-item relative w-full">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0f172a] to-[#1e293b] opacity-80"></div>
+      <img src="https://press.razer.com/wp-content/uploads/2023/11/Razer-8KHz-PR-KV-980x500-1.jpg" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center max-w-4xl px-4">
+          <h1 class="text-5xl font-bold mb-4 text-white">8000Hz <span class="gradient-text">Polling Rate</span></h1>
+          <p class="text-xl mb-8 text-gray-200">Experience ultra-responsive performance with our cutting-edge technology designed for professional gamers.</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="#products" class="btn btn-vibrant">
+              <i class="fas fa-bolt mr-2"></i> Shop Pro Mice
+            </a>
+            <a href="#features" class="btn btn-outline-glow">
+              <i class="fas fa-list-ul mr-2"></i> View Specs
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href="#slide1" class="carousel-nav">❮</a> 
+        <a href="#slide3" class="carousel-nav">❯</a>
+      </div>
+    </div> 
+    <div id="slide3" class="carousel-item relative w-full">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0f172a] to-[#1e293b] opacity-80"></div>
+      <img src="https://assets2.razerzone.com/images/pnx.assets/0d7a5ccfece341f3ba0c3bd39efd0ed1/find-the-right-mouse-fit-category-768x500-mobile.jpg" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center max-w-4xl px-4">
+          <h1 class="text-5xl font-bold mb-4 text-white">Find Your <span class="gradient-text">Perfect Fit</span></h1>
+          <p class="text-xl mb-8 text-gray-200">Ergonomic designs for every hand size and grip style, ensuring comfort during extended gaming sessions.</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="#products" class="btn btn-vibrant">
+              <i class="fas fa-hand-paper mr-2"></i> Explore Ergonomic Mice
+            </a>
+            <a href="#faq" class="btn btn-outline-glow">
+              <i class="fas fa-ruler mr-2"></i> Size Guide
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <a href="#slide2" class="carousel-nav">❮</a> 
+        <a href="#slide1" class="carousel-nav">❯</a>
+      </div>
+    </div>
+  </div>
+
+  
+  <section id="products" class="py-16 bg-[#0f172a]">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Featured <span class="gradient-text">Products</span></h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">Discover our most popular gaming mice, engineered for performance and designed for comfort.</p>
+      </div>
+      
+      
+      <div class="flex justify-center mb-10">
+        <div class="inline-flex flex-wrap justify-center gap-4 p-2 rounded-xl bg-[#1e1e3a] shadow-xl">
+          <button class="category-filter active px-6 py-2.5 rounded-lg font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5" data-category="all">
+            <i class="fas fa-th-large mr-2"></i>All Mice
+          </button>
+          <button class="category-filter px-6 py-2.5 rounded-lg font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5" data-category="gaming">
+            <i class="fas fa-gamepad mr-2"></i>Gaming
+          </button>
+          <button class="category-filter px-6 py-2.5 rounded-lg font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5" data-category="productivity">
+            <i class="fas fa-briefcase mr-2"></i>Productivity
+          </button>
+          <button class="category-filter px-6 py-2.5 rounded-lg font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5" data-category="ergonomic">
+            <i class="fas fa-hand-paper mr-2"></i>Ergonomic
+          </button>
+          <button class="category-filter px-6 py-2.5 rounded-lg font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5" data-category="premium">
+            <i class="fas fa-crown mr-2"></i>Premium
+          </button>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="products-grid">
+        
+        <div class="col-span-full flex justify-center">
+          <div class="loading-spinner w-12 h-12 border-4 border-vibrant-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="features" class="py-16 bg-[#1a1a2e]">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Why Choose <span class="gradient-text">MouseHaven</span></h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">We offer the best gaming mice with cutting-edge technology and ergonomic designs.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="card vibrant-card shadow-xl hover:shadow-2xl transition-all glow-effect">
+          <div class="card-body items-center text-center">
+            <div class="w-16 h-16 rounded-full bg-vibrant-900 flex items-center justify-center mb-4">
+              <i class="fas fa-bolt text-2xl text-vibrant-400"></i>
+            </div>
+            <h3 class="card-title text-xl">Ultra-Fast Response</h3>
+            <p class="text-gray-300">Experience lightning-fast response times with our high-performance mice featuring up to 8000Hz polling rates.</p>
+            <div class="card-actions mt-4">
+              <a href="#products" class="btn btn-sm btn-vibrant">
+                <i class="fas fa-bolt mr-2"></i> Shop Fast Mice
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card vibrant-card shadow-xl hover:shadow-2xl transition-all glow-effect">
+          <div class="card-body items-center text-center">
+            <div class="w-16 h-16 rounded-full bg-neon-900 flex items-center justify-center mb-4">
+              <i class="fas fa-feather-alt text-2xl text-neon-400"></i>
+            </div>
+            <h3 class="card-title text-xl">Lightweight Design</h3>
+            <p class="text-gray-300">Our mice are engineered to be incredibly lightweight, with some models weighing as little as 49 grams.</p>
+            <div class="card-actions mt-4">
+              <a href="#products" class="btn btn-sm btn-neon">
+                <i class="fas fa-feather mr-2"></i> Shop Lightweight
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card vibrant-card shadow-xl hover:shadow-2xl transition-all glow-effect">
+          <div class="card-body items-center text-center">
+            <div class="w-16 h-16 rounded-full bg-hot-900 flex items-center justify-center mb-4">
+              <i class="fas fa-battery-full text-2xl text-hot-400"></i>
+            </div>
+            <h3 class="card-title text-xl">Long Battery Life</h3>
+            <p class="text-gray-300">Enjoy extended gaming sessions with batteries that last up to 90 hours on a single charge.</p>
+            <div class="card-actions mt-4">
+              <a href="#products" class="btn btn-sm bg-hot-600 hover:bg-hot-700 text-white border-0">
+                <i class="fas fa-battery-full mr-2"></i> Shop Long-Lasting
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="testimonials" class="py-16 bg-[#0f172a]">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">What Our <span class="gradient-text">Customers Say</span></h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">Hear from gamers who have elevated their performance with our mice.</p>
+      </div>
+      
+      <div class="carousel w-full max-w-5xl mx-auto">
+        <div id="testimonial1" class="carousel-item relative w-full">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+            <div class="card vibrant-card shadow-xl">
+              <div class="card-body">
+                <div class="flex items-center mb-4">
+                  <div class="avatar">
+                    <div class="w-12 h-12 rounded-full">
+                      <img src="./ameer.jpeg" alt="Customer" />
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="font-bold">Ameer Hamzah</h3>
+                    <div class="text-yellow-400 flex">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-gray-300">"The DeathAdder V3 Pro completely transformed my gaming experience. The precision and comfort are unmatched, and I've seen a noticeable improvement in my performance."</p>
+                <div class="card-actions justify-end mt-4">
+                  <a href="#products" class="btn btn-sm btn-vibrant">
+                    <i class="fas fa-shopping-cart mr-2"></i> Shop DeathAdder
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card vibrant-card shadow-xl">
+              <div class="card-body">
+                <div class="flex items-center mb-4">
+                  <div class="avatar">
+                    <div class="w-12 h-12 rounded-full">
+                      <img src="./mariz.jpeg" alt="Customer" />
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="font-bold">Mohiul Islam</h3>
+                    <div class="text-yellow-400 flex">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-gray-300">"As a professional gamer, I need equipment I can rely on. The Viper Mini Signature Edition is incredibly lightweight and responsive, giving me the edge I need in tournaments."</p>
+                <div class="card-actions justify-end mt-4">
+                  <a href="#products" class="btn btn-sm btn-vibrant">
+                    <i class="fas fa-shopping-cart mr-2"></i> Shop Viper Mini
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a href="#testimonial3" class="carousel-nav">❮</a> 
+            <a href="#testimonial2" class="carousel-nav">❯</a>
+          </div>
+        </div>
+        
+        <div id="testimonial2" class="carousel-item relative w-full">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+            <div class="card vibrant-card shadow-xl">
+              <div class="card-body">
+                <div class="flex items-center mb-4">
+                  <div class="avatar">
+                    <div class="w-12 h-12 rounded-full">
+                      <img src="./auto.jpeg" alt="Customer" />
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="font-bold">Ibrahim Abdullah</h3>
+                    <div class="text-yellow-400 flex">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-gray-300">"I've tried many gaming mice over the years, but nothing compares to the build quality and performance of MouseHaven's products. The customer service is also exceptional."</p>
+                <div class="card-actions justify-end mt-4">
+                  <a href="#products" class="btn btn-sm btn-vibrant">
+                    <i class="fas fa-shopping-cart mr-2"></i> Browse Collection
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card vibrant-card shadow-xl">
+              <div class="card-body">
+                <div class="flex items-center mb-4">
+                  <div class="avatar">
+                    <div class="w-12 h-12 rounded-full">
+                      <img src="./ahnaf.jpeg" alt="Customer" />
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="font-bold">Mostafa Ahnaf Hossain</h3>
+                    <div class="text-yellow-400 flex">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-gray-300">"The ergonomic design of the Basilisk V3 Pro has completely eliminated my wrist pain during long gaming sessions. Plus, the customizable buttons have improved my workflow in design applications."</p>
+                <div class="card-actions justify-end mt-4">
+                  <a href="#products" class="btn btn-sm btn-vibrant">
+                    <i class="fas fa-shopping-cart mr-2"></i> Shop Basilisk
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a href="#testimonial1" class="carousel-nav">❮</a> 
+            <a href="#testimonial3" class="carousel-nav">❯</a>
+          </div>
+        </div>
+        
+        <div id="testimonial3" class="carousel-item relative w-full">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+            <div class="card vibrant-card shadow-xl">
+              <div class="card-body">
+                <div class="flex items-center mb-4">
+                  <div class="avatar">
+                    <div class="w-12 h-12 rounded-full">
+                      <img src="./usama.png" alt="Customer" />
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="font-bold">Usama Faiyaz</h3>
+                    <div class="text-yellow-400 flex">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-gray-300">"The 8000Hz polling rate on these mice is a game-changer. I can feel the difference in responsiveness, especially in fast-paced FPS games. Worth every penny!"</p>
+                <div class="card-actions justify-end mt-4">
+                  <a href="#products" class="btn btn-sm btn-vibrant">
+                    <i class="fas fa-shopping-cart mr-2"></i> Shop Pro Mice
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card vibrant-card shadow-xl">
+              <div class="card-body">
+                <div class="flex items-center mb-4">
+                  <div class="avatar">
+                    <div class="w-12 h-12 rounded-full">
+                      <img src="./yola.jpg" alt="Customer" />
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <h3 class="font-bold">Safayat Khan</h3>
+                    <div class="text-yellow-400 flex">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-gray-300">"The battery life on these wireless mice is incredible. I can game for days without worrying about charging. The low-latency connection makes it feel just like a wired mouse."</p>
+                <div class="card-actions justify-end mt-4">
+                  <a href="#products" class="btn btn-sm btn-vibrant">
+                    <i class="fas fa-shopping-cart mr-2"></i> Shop Wireless
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a href="#testimonial2" class="carousel-nav">❮</a> 
+            <a href="#testimonial1" class="carousel-nav">❯</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="faq" class="py-16 bg-[#1a1a2e]">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Frequently Asked <span class="gradient-text">Questions</span></h2>
+        <p class="text-gray-300 max-w-2xl mx-auto">Get answers to common questions about our gaming mice.</p>
+      </div>
+      
+      <div class="max-w-3xl mx-auto space-y-4">
+        <div class="collapse collapse-plus bg-[#16213e] shadow-md rounded-lg">
+          <input type="checkbox" /> 
+          <div class="collapse-title text-xl font-medium">
+            What is the best gaming mouse?
+          </div>
+          <div class="collapse-content"> 
+            <p>It depends on your preference, but some top choices are Razer DeathAdder, Logitech G Pro, and SteelSeries Rival. The best mouse for you depends on your hand size, grip style, and gaming preferences.</p>
+            <div class="mt-4">
+              <a href="#products" class="btn btn-sm btn-vibrant">
+                <i class="fas fa-mouse mr-2"></i> Shop Gaming Mice
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="collapse collapse-plus bg-[#16213e] shadow-md rounded-lg">
+          <input type="checkbox" /> 
+          <div class="collapse-title text-xl font-medium">
+            Do wireless mice have lag?
+          </div>
+          <div class="collapse-content"> 
+            <p>Most modern wireless mice use advanced technology like 2.4GHz and Bluetooth, reducing lag to an almost unnoticeable level. Premium gaming wireless mice often have response times comparable to or better than wired alternatives.</p>
+            <div class="mt-4">
+              <a href="#products" class="btn btn-sm btn-vibrant">
+                <i class="fas fa-wifi mr-2"></i> Shop Wireless Mice
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="collapse collapse-plus bg-[#16213e] shadow-md rounded-lg">
+          <input type="checkbox" /> 
+          <div class="collapse-title text-xl font-medium">
+            What is DPI and why is it important?
+          </div>
+          <div class="collapse-content"> 
+            <p>DPI (dots per inch) determines the sensitivity of your mouse. Higher DPI means faster cursor movement with less physical movement, while lower DPI provides more precision for tasks requiring fine control. Most gaming mice allow you to adjust DPI settings to match different games and scenarios.</p>
+            <div class="mt-4">
+              <a href="#products" class="btn btn-sm btn-vibrant">
+                <i class="fas fa-search-plus mr-2"></i> Shop High-DPI Mice
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="collapse collapse-plus bg-[#16213e] shadow-md rounded-lg">
+          <input type="checkbox" /> 
+          <div class="collapse-title text-xl font-medium">
+            How long do gaming mice typically last?
+          </div>
+          <div class="collapse-content"> 
+            <p>Quality gaming mice can last 3-5 years with regular use. Factors affecting lifespan include build quality, switch durability, and how intensively you use the mouse. Premium mice often feature optical switches rated for 70+ million clicks.</p>
+            <div class="mt-4">
+              <a href="#products" class="btn btn-sm btn-vibrant">
+                <i class="fas fa-medal mr-2"></i> Shop Premium Mice
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="py-16 bg-gradient-to-r from-[#0f766e] to-[#0d9488] text-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+        <p class="mb-8">Subscribe to our newsletter for the latest product releases, exclusive deals, and gaming tips.</p>
+        <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 justify-center">
+          <input type="email" id="newsletter-email" placeholder="Enter your email" class="input input-bordered w-full max-w-xs bg-[#16213e] border-[#2a2a4a] focus:border-vibrant-400 focus:ring-2 focus:ring-vibrant-400" required />
+          <button type="submit" class="btn btn-neon">
+            <i class="fas fa-paper-plane mr-2"></i> Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  
+  <footer id="contact" class="bg-[#0f172a] text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4 flex items-center">
+            <i class="fas fa-mouse text-vibrant-400 mr-2"></i>
+            Mouse<span class="text-vibrant-400">Haven</span>
+          </h3>
+          <p class="text-gray-400">Premium gaming mice for every player. Designed for performance, comfort, and precision.</p>
+          <div class="flex mt-4 space-x-4">
+            <a href="https://facebook.com" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-4">Products</h3>
+          <ul class="space-y-2">
+            <li><a href="#products" class="text-gray-400 hover:text-vibrant-400 transition-colors">Gaming Mice</a></li>
+            <li><a href="#products" class="text-gray-400 hover:text-vibrant-400 transition-colors">Productivity Mice</a></li>
+            <li><a href="#products" class="text-gray-400 hover:text-vibrant-400 transition-colors">Ergonomic Mice</a></li>
+            <li><a href="#products" class="text-gray-400 hover:text-vibrant-400 transition-colors">Premium Collection</a></li>
+            <li><a href="#products" class="text-gray-400 hover:text-vibrant-400 transition-colors">Accessories</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-4">Support</h3>
+          <ul class="space-y-2">
+            <li><a href="#faq" class="text-gray-400 hover:text-vibrant-400 transition-colors">FAQs</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-vibrant-400 transition-colors">Shipping & Returns</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-vibrant-400 transition-colors">Warranty</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-vibrant-400 transition-colors">Contact Support</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-vibrant-400 transition-colors">User Manuals</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold mb-4">Contact Us</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex items-start">
+              <i class="fas fa-map-marker-alt mt-1 mr-2 text-vibrant-400"></i>
+              <span>iiuc, sonaichari, sitakundo</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-phone mr-2 text-vibrant-400"></i>
+              <a href="tel:+11234567890" class="hover:text-vibrant-400 transition-colors">123456789</a>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-envelope mr-2 text-vibrant-400"></i>
+              <a href="mailto:info@mousehaven.com" class="hover:text-vibrant-400 transition-colors">info@mousehaven.com</a>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-clock mr-2 text-vibrant-400"></i>
+              <span>Mon-Fri: 9AM - 6PM</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-[#2a2a4a] mt-8 pt-8 text-center text-gray-500">
+        <p>&copy; 2025 MouseHaven. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  
+  <div id="toast" class="fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center">
+    <i class="fas fa-check-circle mr-2"></i>
+    <span>Item added to cart</span>
+  </div>
+
+  <div id="newsletter-toast" class="fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center bg-vibrant-500 text-white">
+    <i class="fas fa-envelope-open mr-2"></i>
+    <span>Thank you for subscribing to our newsletter!</span>
+  </div>
+
+  
+  <div id="purchase-modal" class="purchase-modal">
+    <div class="purchase-modal-content">
+      <div class="purchase-icon">
+        <i class="fas fa-check text-3xl"></i>
+      </div>
+      <h3 class="text-2xl font-bold mb-2">Purchase Complete!</h3>
+      <p class="text-gray-400 mb-4">Thank you for your order.</p>
+      <div class="bg-[#1e1e3a] p-4 rounded-lg mb-6">
+        <p class="text-lg">Your purchase is complete and total due is <span id="purchase-total" class="font-bold">$0.00</span></p>
+        <p class="text-sm mt-2">A confirmation email has been sent to <span id="confirmation-email" class="font-medium">your email address</span></p>
+      </div>
+      <div class="mt-4 mb-6">
+        <h4 class="font-semibold mb-2">Order Details</h4>
+        <div id="order-summary" class="text-left bg-[#1e1e3a] p-4 rounded-lg">          
+        </div>
+      </div>
+      <button id="continue-shopping" class="btn btn-vibrant px-6 py-3 rounded-lg">
+        <i class="fas fa-shopping-bag mr-2"></i> Continue Shopping
+      </button>
+    </div>
+  </div>
+
+  
+  <script src="script.js"></script>
+  
+</body>
+</html>
